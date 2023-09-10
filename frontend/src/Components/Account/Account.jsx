@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./Account.css"
 import {useDispatch, useSelector} from "react-redux"
-import { getMyPosts, logoutUser } from '../../Actions/User';
+import { deleteMyProfile, getMyPosts, logoutUser } from '../../Actions/User';
 import Post from '../Post/Post'
 import User from '../User/User'
 
@@ -14,16 +14,21 @@ const Account = () => {
   const dispatch = useDispatch();
   const {user,loading:userLoading}= useSelector((state)=>state.user);
   const {loading,error,posts} = useSelector((state)=>state.myPosts); 
-  const {error:likeError,message} = useSelector((state)=>state.like);
+  const {error:likeError,message,loading:deleteLoading} = useSelector((state)=>state.like);
   const alert = useAlert();
   const [followersToggle,setFollowersToggle] =useState(false);
   const [followingToggle,setFollowingToggle] =useState(false);
 
-  const logoutHandler = async () =>{
-    await dispatch(logoutUser());
+  const logoutHandler = () =>{
+      dispatch(logoutUser());
     alert.success("Logged out Successfully")
   }
 
+  const deleteProfileHandler = async() =>{
+    await dispatch(deleteMyProfile())
+     dispatch(logoutUser());
+
+  }
 
 
   useEffect(()=>{
@@ -36,6 +41,7 @@ const Account = () => {
       alert.error(error);
       dispatch({type:"clearErrors"});
     }  
+    
     if(likeError){
       alert.error(likeError);
       dispatch({type:"clearErrors"});
@@ -101,6 +107,8 @@ const Account = () => {
       <Button
       variant='text'
       style={{color:"red",margin:"2vmax"}}
+      onClick={deleteProfileHandler}
+      disabled={deleteLoading}
       >
         Delete My Profile
       </Button>

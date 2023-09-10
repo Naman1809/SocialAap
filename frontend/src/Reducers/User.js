@@ -103,3 +103,22 @@ export const allUsersReducer = createReducer(intitialState,{
   }
 
 })
+
+
+export const userProfileReducer = createReducer(intitialState,{
+  userProfileRequest:(state)=>{
+    state.loading=true;
+  },
+  userProfileSuccess:(state,action)=>{
+    state.loading=false;
+    state.user= action.payload
+  },
+  userProfileFailure:(state,action)=>{
+    state.loading=false;
+    state.error=action.payload
+  },
+  clearErrors:(state) =>{
+    state.error=null;
+  }
+
+})

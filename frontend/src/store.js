@@ -1,6 +1,6 @@
 import {configureStore} from "@reduxjs/toolkit";
-import { allUsersReducer, postOfFollowingReducer, userReducer } from "./Reducers/User";
-import { likeReducer, myPostsReducer } from "./Reducers/Post";
+import { allUsersReducer, postOfFollowingReducer, userProfileReducer, userReducer } from "./Reducers/User";
+import { likeReducer, myPostsReducer, userPostsReducer } from "./Reducers/Post";
  const store=configureStore({
     reducer:{
         user:userReducer,
@@ -8,6 +8,8 @@ import { likeReducer, myPostsReducer } from "./Reducers/Post";
         allUsers:allUsersReducer,
         like:likeReducer,
         myPosts: myPostsReducer,
+        userProfile: userProfileReducer,
+        userPosts: userPostsReducer,
     }
 });
 

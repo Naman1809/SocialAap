@@ -9,6 +9,11 @@ import Home from './Components/Home/Home';
 import Account from './Components/Account/Account';
 import NewPost from './Components/NewPost/NewPost';
 import Register from './Components/Register/Register';
+import UpdateProfile from './Components/UpdateProfile/UpdateProfile';
+import UpdatePassword from './Components/UpdatePassword/UpdatePassword';
+import ResetPassword from './Components/ResetPassword/ResetPassword';
+import ForgotPassword from './Components/ForgotPassword/ForgotPassword';
+import UserProfile from './Components/UserProfile/UserProfile';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +33,11 @@ const {isAuthenticated} = useSelector((state)=>state.user)
       <Route path="/account" element={isAuthenticated ? <Account/> : <Login/>}/>
       <Route path="/register" element={isAuthenticated ? <Account/> : <Register/>}/>
       <Route path="/newpost" element={isAuthenticated ? <NewPost/> : <Login/>}/>
+      <Route path="/update/profile" element={isAuthenticated ? <UpdateProfile/> : <Login/>}/>
+      <Route path="/update/password" element={isAuthenticated ? <UpdatePassword/> : <Login/>}/>
+      <Route path="/forgot/password" element={isAuthenticated ? <UpdatePassword/> : <ForgotPassword/>}/>
+      <Route path="/password/reset/:token" element={isAuthenticated ? <ForgotPassword/> : <ResetPassword/>}/>
+      <Route path="/user/:id" element={isAuthenticated ? <UserProfile /> : <Login/>}/>
 
     </Routes>
     </Router>
